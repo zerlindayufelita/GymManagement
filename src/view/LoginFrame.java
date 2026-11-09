@@ -3,16 +3,20 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginView extends JFrame {
+public class LoginFrame extends JFrame {
     private JTextField txtUsername;
     private JPasswordField txtPassword;
     private JButton btnLogin;
 
-    public LoginView() {
-        setTitle("Gym Management - Login");
-        setSize(350, 220);
+    public LoginFrame() {
+        setTitle("Gym Management System");
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // tampil di tengah layar
+        setLocationRelativeTo(null);
+
+        JLabel title = new JLabel(
+                "GYM MANAGEMENT SYSTEM",
+                SwingConstants.CENTER);
 
         JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -31,7 +35,6 @@ public class LoginView extends JFrame {
         add(panel);
     }
 
-    // Getter agar controller bisa membaca input & memasang aksi
     public String getUsername() {
         return txtUsername.getText();
     }
@@ -43,4 +46,5 @@ public class LoginView extends JFrame {
     public JButton getBtnLogin() {
         return btnLogin;
     }
+
 }
