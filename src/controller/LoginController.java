@@ -1,12 +1,15 @@
 package controller;
 
 import javax.swing.JOptionPane;
-
+import dao.UserDAO;
+import model.User;
+import java.sql.SQLException;
 import view.LoginFrame;
 import view.DashboardFrame;
 
 public class LoginController {
     private LoginFrame loginView;
+    private UserDAO userDAO = new UserDAO();
 
     public LoginController(LoginFrame loginView) {
         this.loginView = loginView;
@@ -17,6 +20,7 @@ public class LoginController {
     }
 
     private void login() {
+
         String username = loginView.getUsername();
         String password = loginView.getPassword();
 
@@ -27,21 +31,35 @@ public class LoginController {
             return;
         }
 
-        if (username.equals("admin") &&
-                password.equals("admin123")) {
+        try {
 
-            JOptionPane.showMessageDialog(loginView, "Login berhasil");
+            User user = userDAO.authenticate(username, password);
 
-            loginView.dispose();
+            if (user != null) {
 
-            DashboardFrame dashboard = new DashboardFrame(username);
-            dashboard.setVisible(true);
+                JOptionPane.showMessageDialog(
+                        loginView,
+                        "Login berhasil! Selamat datang, " + user.getFullName());
 
-        } else {
+                loginView.dispose();
 
-            JOptionPane.showMessageDialog(loginView, "Username atau password salah!");
+                DashboardFrame dashboard = new DashboardFrame(user.getUsername());
 
+                dashboard.setVisible(true);
+
+            } else {
+
+                JOptionPane.showMessageDialog(
+                        loginView,
+                        "Username atau password salah!");
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(
+                    loginView,
+                    "Terjadi kesalahan koneksi database: " + e.getMessage());
+            e.printStackTrace();
         }
-
     }
 }
