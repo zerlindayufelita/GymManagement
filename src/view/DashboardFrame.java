@@ -43,9 +43,7 @@ public class DashboardFrame extends JFrame {
                                 createPage("Selamat Datang, " + username + "!"),
                                 "Dashboard");
 
-                contentPanel.add(
-                                createPage("Halaman Data Member"),
-                                "Member");
+                contentPanel.add(new MemberPanel(), "Member");
 
                 contentPanel.add(
                                 createPage("Halaman Paket Gym"),

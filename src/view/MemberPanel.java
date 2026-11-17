@@ -50,7 +50,7 @@ public class MemberPanel extends JPanel {
         txtNama = new JTextField();
 
         cmbJenisKelamin = new JComboBox<>(
-                new String[]{"Laki-laki", "Perempuan"});
+                new String[] { "Laki-laki", "Perempuan" });
 
         txtNoTelepon = new JTextField();
         txtAlamat = new JTextField();
@@ -152,8 +152,7 @@ public class MemberPanel extends JPanel {
                 cmbJenisKelamin.getSelectedItem().toString(),
                 txtNoTelepon.getText(),
                 txtAlamat.getText(),
-                null
-        );
+                null);
 
         memberController.addMember(member);
     }
@@ -177,8 +176,7 @@ public class MemberPanel extends JPanel {
                 cmbJenisKelamin.getSelectedItem().toString(),
                 txtNoTelepon.getText(),
                 txtAlamat.getText(),
-                null
-        );
+                null);
 
         memberController.editMember(member);
     }
@@ -197,8 +195,7 @@ public class MemberPanel extends JPanel {
                 this,
                 "Yakin ingin menghapus member ini?",
                 "Konfirmasi",
-                JOptionPane.YES_NO_OPTION
-        );
+                JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
 

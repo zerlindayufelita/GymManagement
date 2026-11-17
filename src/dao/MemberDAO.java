@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.Connection;
@@ -13,7 +12,7 @@ import model.Member;
 
 public class MemberDAO {
 
-    // Menampilkan semua data member
+    // READ: Menampilkan semua data member
     public List<Member> getAllMember() throws SQLException {
 
         List<Member> listMember = new ArrayList<>();
@@ -21,18 +20,19 @@ public class MemberDAO {
         String sql = "SELECT * FROM member";
 
         try (Connection conn = DBConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
 
                 Member member = new Member(
-                        rs.getInt("id_member"),
-                        rs.getString("nama"),
-                        rs.getString("jenis_kelamin"),
-                        rs.getString("no_telepon"),
-                        rs.getString("alamat"),
-                        rs.getString("tanggal_daftar"));
+                    rs.getInt("id_member"),
+                    rs.getString("nama"),
+                    rs.getString("jenis_kelamin"),
+                    rs.getString("no_telepon"),
+                    rs.getString("alamat"),
+                    rs.getString("tanggal_daftar")
+                );
 
                 listMember.add(member);
             }
@@ -41,15 +41,15 @@ public class MemberDAO {
         return listMember;
     }
 
-    // Menambahkan member baru
+    // CREATE: Menambahkan member baru
     public boolean insertMember(Member member) throws SQLException {
 
         String sql = "INSERT INTO member "
-                + "(nama, jenis_kelamin, no_telepon, alamat, tanggal_daftar) "
-                + "VALUES (?, ?, ?, ?, ?)";
+                   + "(nama, jenis_kelamin, no_telepon, alamat, tanggal_daftar) "
+                   + "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, member.getNama());
             stmt.setString(2, member.getJenisKelamin());
@@ -61,19 +61,19 @@ public class MemberDAO {
         }
     }
 
-    // Mengedit data member
+    // UPDATE: Mengedit data member
     public boolean updateMember(Member member) throws SQLException {
 
         String sql = "UPDATE member SET "
-                + "nama = ?, "
-                + "jenis_kelamin = ?, "
-                + "no_telepon = ?, "
-                + "alamat = ?, "
-                + "tanggal_daftar = ? "
-                + "WHERE id_member = ?";
+                   + "nama = ?, "
+                   + "jenis_kelamin = ?, "
+                   + "no_telepon = ?, "
+                   + "alamat = ?, "
+                   + "tanggal_daftar = ? "
+                   + "WHERE id_member = ?";
 
         try (Connection conn = DBConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, member.getNama());
             stmt.setString(2, member.getJenisKelamin());
@@ -86,13 +86,13 @@ public class MemberDAO {
         }
     }
 
-    // Menghapus data member
+    // DELETE: Menghapus data member
     public boolean deleteMember(int idMember) throws SQLException {
 
         String sql = "DELETE FROM member WHERE id_member = ?";
 
         try (Connection conn = DBConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idMember);
 
