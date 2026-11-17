@@ -20,19 +20,18 @@ public class MemberDAO {
         String sql = "SELECT * FROM member";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
 
                 Member member = new Member(
-                    rs.getInt("id_member"),
-                    rs.getString("nama"),
-                    rs.getString("jenis_kelamin"),
-                    rs.getString("no_telepon"),
-                    rs.getString("alamat"),
-                    rs.getString("tanggal_daftar")
-                );
+                        rs.getInt("id_member"),
+                        rs.getString("nama"),
+                        rs.getString("jenis_kelamin"),
+                        rs.getString("no_telepon"),
+                        rs.getString("alamat"),
+                        rs.getString("tanggal_daftar"));
 
                 listMember.add(member);
             }
@@ -45,11 +44,11 @@ public class MemberDAO {
     public boolean insertMember(Member member) throws SQLException {
 
         String sql = "INSERT INTO member "
-                   + "(nama, jenis_kelamin, no_telepon, alamat, tanggal_daftar) "
-                   + "VALUES (?, ?, ?, ?, ?)";
+                + "(nama, jenis_kelamin, no_telepon, alamat, tanggal_daftar) "
+                + "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, member.getNama());
             stmt.setString(2, member.getJenisKelamin());
@@ -65,22 +64,20 @@ public class MemberDAO {
     public boolean updateMember(Member member) throws SQLException {
 
         String sql = "UPDATE member SET "
-                   + "nama = ?, "
-                   + "jenis_kelamin = ?, "
-                   + "no_telepon = ?, "
-                   + "alamat = ?, "
-                   + "tanggal_daftar = ? "
-                   + "WHERE id_member = ?";
+                + "nama = ?, "
+                + "jenis_kelamin = ?, "
+                + "no_telepon = ?, "
+                + "alamat = ? "
+                + "WHERE id_member = ?";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, member.getNama());
             stmt.setString(2, member.getJenisKelamin());
             stmt.setString(3, member.getNoTelepon());
             stmt.setString(4, member.getAlamat());
-            stmt.setString(5, member.getTanggalDaftar());
-            stmt.setInt(6, member.getIdMember());
+            stmt.setInt(5, member.getIdMember());
 
             return stmt.executeUpdate() > 0;
         }
@@ -92,7 +89,7 @@ public class MemberDAO {
         String sql = "DELETE FROM member WHERE id_member = ?";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idMember);
 

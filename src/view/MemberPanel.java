@@ -1,6 +1,7 @@
 
 package view;
 
+import java.time.LocalDate;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -152,7 +153,7 @@ public class MemberPanel extends JPanel {
                 cmbJenisKelamin.getSelectedItem().toString(),
                 txtNoTelepon.getText(),
                 txtAlamat.getText(),
-                null);
+                LocalDate.now().toString());
 
         memberController.addMember(member);
     }
@@ -176,7 +177,7 @@ public class MemberPanel extends JPanel {
                 cmbJenisKelamin.getSelectedItem().toString(),
                 txtNoTelepon.getText(),
                 txtAlamat.getText(),
-                null);
+                LocalDate.now().toString());
 
         memberController.editMember(member);
     }
